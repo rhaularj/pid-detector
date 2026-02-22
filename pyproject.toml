@@ -1,0 +1,115 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "piddetector"
+version = "1.0.0"
+description = "P&ID symbol detection from PDF documents using YOLO"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "PidDetector Team"}
+]
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["pid", "yolo", "object-detection", "pdf", "engineering", "piping"]
+dependencies = [
+    "ultralytics>=8.0.0",
+    "opencv-python>=4.5.0",
+    "numpy>=1.21.0",
+    "pandas>=1.3.0",
+    "matplotlib>=3.3.0",
+    "PyMuPDF>=1.20.0",
+    "pdfplumber>=0.7.0",
+    "tqdm>=4.60.0",
+    "openpyxl>=3.0.0",
+]
+
+[project.optional-dependencies]
+gui = [
+    "tkinterdnd2>=0.3.0",
+]
+ocr = [
+    "easyocr>=1.6.0",
+    "paddlex>=2.1.0",
+    "paddlepaddle>=2.4.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+all = [
+    "piddetector[gui,ocr,dev]",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/piddetector"
+Documentation = "https://github.com/yourusername/piddetector#readme"
+Repository = "https://github.com/yourusername/piddetector.git"
+Issues = "https://github.com/yourusername/piddetector/issues"
+
+[project.scripts]
+piddetector = "src.app:main"
+piddetector-train = "src.training.train_yolo:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.yml", "*.json"]
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+  | runs
+  | __pycache__
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip = [".git", ".venv", "build", "dist", "runs"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["runs", "build", "dist"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]

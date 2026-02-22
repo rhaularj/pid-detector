@@ -1,0 +1,32 @@
+# PidDetector Requirements
+# Core dependencies for P&ID symbol detection
+
+# YOLO Object Detection
+ultralytics==8.3.203
+
+# Image Processing
+opencv-python==4.12.0.88
+numpy==2.2.6
+
+# PDF Processing
+PyMuPDF>=1.20.0
+pdfplumber>=0.7.0
+pdf2image==1.17.0
+
+# Data Processing
+pandas==2.3.2
+openpyxl>=3.0.0
+
+# Visualization
+matplotlib==3.10.6
+tqdm>=4.60.0
+
+# GUI
+tkinterdnd2==0.4.3
+
+# OCR (optional)
+easyocr==1.7.2
+paddlex==3.2.1
+
+# Compatibility
+future==1.0.0
